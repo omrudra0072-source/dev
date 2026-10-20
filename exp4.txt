@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdio.h>
+void quicksort(int A[], int first, int last)
+{
+    if (first < last)
+    {
+        int pivot = first;
+        int i = first + 1;
+        int j = last;
+        while (i <= j)
+        {
+            while (i <= last && A[i] <= A[pivot])
+                i++;
+            while (j > first && A[j] > A[pivot])
+                j--;
+            if (i < j)
+            {
+                int temp = A[i];
+                A[i] = A[j];
+                A[j] = temp;
+            }
+        }
+        int temp = A[pivot];
+        A[pivot] = A[j];
+        A[j] = temp;
+        quicksort(A, first, j - 1);
+        quicksort(A, j + 1, last);
+    }
+}
+int main()
+{
+    int n;
+    printf("Enter number of elements in array: ");
+    scanf("%d", &n);
+    int A[n];
+    printf("Enter elements in array:\n");
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &A[i]);
+    }
+    quicksort(A, 0, n - 1);
+    printf("Sorted array:\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%d ", A[i]);
+    }
+    return 0;
+}
